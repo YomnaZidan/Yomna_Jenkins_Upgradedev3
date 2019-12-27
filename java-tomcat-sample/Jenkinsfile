@@ -1,3 +1,23 @@
+
+pipeline{
+		agent any 
+		stage {
+			stage("Build Application'){
+				steps {
+					sh 'mvn clean package'
+					}
+					post {
+					success {
+						echo "Now Archiving the Artifacts ..."
+						archiveArtifacts artifacts: '**/*.war'
+						}
+					}
+				}
+			}
+		}		
+
+
+/*
 pipeline {
     agent any
     stages {
@@ -29,3 +49,4 @@ pipeline {
         }
     }
 }
+*/
